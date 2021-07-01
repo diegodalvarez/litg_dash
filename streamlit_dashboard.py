@@ -229,7 +229,6 @@ while True:
         dist_plot.update_layout(showlegend=False, xaxis_title="Return (%)", yaxis_title = "frequency", font = dict(size = 15))
         st.plotly_chart(dist_plot)
 
-    st.write("$^*$ using 95% confidence interval")
     st.write("The information provided does not constitute as investment advice")
     st.write("Created by Diego Alvarez, not associated with Leeds Investment Trading Group Fund, Values may not be up-to-date or approximations, updates don't occur until trading day ends")
     
