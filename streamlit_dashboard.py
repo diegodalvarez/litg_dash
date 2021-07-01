@@ -234,7 +234,7 @@ while True:
     st.write("Created by Diego Alvarez, not associated with Leeds Investment Trading Group Fund, Values may not be up-to-date or approximations, updates don't occur until trading day ends")
     
     #the cost basis day provided from LITG
-    next_update = dt.datetime.today() + dt.timedelta(seconds = 30)
+    next_update = dt.datetime.today() + dt.timedelta(seconds = 60)
     
     #get update time
     next_update_time = next_update - dt.timedelta(seconds = 7 * 60 * 60)
@@ -244,7 +244,7 @@ while True:
     st.write("next update is scheduled for {}".format(next_update_time))
     
     #wait 30 minutes
-    time.sleep(30)
+    time.sleep(60)
     
     #then rerun the app
     st.experimental_rerun()
