@@ -14,7 +14,7 @@ while True:
     
     #we have to make dataframe by hand becuase everything will run from github so no directory
     
-    #adding intickers
+    #adding in tickers
     index_col = ["ABMD", "MO", "BERY", "BLK", "AVGO", "CTVA", "DOW", "DD", "HCA", "JCI", "MPC",
                  "MKC", "MCD", "MSFT", "OKE", "O", "SRE", "TJX", "UNH", "URI", "VZ", "QQQ", "IJT", "REZ"]
     
@@ -76,8 +76,6 @@ while True:
         #plot the data
         st.bar_chart(monthly_portfolio)
         
-        st.write("test")
-        
     #the diversification pie chart
     with top_col2:
         
@@ -118,17 +116,20 @@ while True:
     #the returns
     with top_col3:
         
+        st.write(daily_portfolio)
+        
         '''
         daily_change = daily_portfolio['value'].pct_change()
         st.write(daily_change[len(daily_change - 1)])
         '''
-        
+        '''
         #output header
         st.markdown("<h1 style='text-align: center; color: white;'>Daily Returns: {}%</h1>".format(0.1), unsafe_allow_html=True)
         st.markdown("<h1 style='text-align: center; color: white;'>Weekly Returns</h1>", unsafe_allow_html=True)
         st.markdown("<h1 style='text-align: center; color: white;'>Yearly Returns</h1>", unsafe_allow_html=True)
         st.markdown("<h1 style='text-align: center; color: white;'>YTD Returns:</h1>", unsafe_allow_html=True)
         st.markdown("<h1 style='text-align: center; color: white;'>Since Conception</h1>", unsafe_allow_html=True)
+        '''
     
     #make top columns
     bottom_col1, bottom_col2, bottom_col3 = st.beta_columns(3)
