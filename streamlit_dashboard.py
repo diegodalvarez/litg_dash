@@ -41,7 +41,7 @@ while True:
     start_date = dt.datetime(2019,2,19)
     
     #get update time
-    update_date = end_date.strftime("%a %D %I:%M %p")
+    update_date = end_date
     
     #show last time we updted
     st.title("Leed's Investment Trading Group Fund (last updated: {})".format(update_date))
@@ -237,7 +237,7 @@ while True:
     next_update = dt.datetime.today() + dt.timedelta(seconds = 60 * 60)
     
     #get update time
-    next_update_time = next_update.strftime("%a %D %I:%M %p")
+    next_update_time = next_update
     
     #output it
     st.write("next update is scheduled for {}".format(next_update_time))
