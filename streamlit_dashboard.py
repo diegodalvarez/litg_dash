@@ -238,7 +238,7 @@ while True:
     
     #get update time
     next_update_time = next_update - dt.timedelta(seconds = 7 * 60 * 60)
-    next_update_time = next_update.strftime("%a %D %I:%M %p") 
+    next_update_time = next_update_time.strftime("%a %D %I:%M %p") 
     
     #output it
     st.write("next update is scheduled for {}".format(next_update_time))
