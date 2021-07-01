@@ -41,7 +41,7 @@ while True:
     start_date = dt.datetime(2019,2,19)
     
     #get update time
-    update_date = end_date.strftime("%a %D %I:%M %p")
+    update_date = end_date.strftime("%a %D %I:%M %p") - dt.timedelta(hours = 7)
     
     #show last time we updted
     st.title("Leed's Investment Trading Group Fund (last updated: {})".format(update_date))
