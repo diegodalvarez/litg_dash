@@ -15,18 +15,8 @@ st.set_page_config(layout="wide")
 
 while True:
     
-    #we have to make dataframe by hand becuase everything will run from github so no directory
-    
-    #adding in tickers
-    index_col = ["ABMD", "MO", "BERY", "BLK", "AVGO", "CTVA", "DOW", "DD", "HCA", "JCI", "MPC",
-                 "MKC", "MCD", "MSFT", "OKE", "O", "SRE", "TJX", "UNH", "URI", "VZ", "QQQ", "IJT", "REZ"]
-    
-    #adding in share cout
-    share_count = [18, 14, 18, 20, 410, 3, 5, 3, 52, 79, 8, 18, 119, 313, 11, 35, 25, 25, 
-                   19, 85, 94, 6, 14, 26]
-    
-    weights = pd.DataFrame(index = index_col)
-    weights['share_count'] = share_count
+    #we have to make dataframe by hand becuase everything will run from github so no directory    
+    weights = pd.read_excel("holdings.xls", index_col = 0)
 
     #get tickers
     tickers = list(weights.index)
@@ -41,8 +31,7 @@ while True:
     start_date = dt.datetime(2019,2,19)
     
     #get update time
-    update_date = end_date - dt.timedelta(seconds = 7 * 60 * 60)
-    update_date = update_date.strftime("%a %D %I:%M %p") 
+    update_date = end_date.strftime("%a %D %I:%M %p") 
     
     #show last time we updted
     st.title("Leed's Investment Trading Group Fund (last updated: {})".format(update_date))
@@ -165,7 +154,7 @@ while True:
     #the portfolio value
     with bottom_col1:
         
-        st.subheader("Performance vs Benchmark")
+        st.subheader("Portfolio vs S&P 500")
         
         #get the performance of the fund
         perf = daily_portfolio['value']
@@ -186,9 +175,9 @@ while True:
         output_df = pd.concat([perf, bench], axis = 1)
         
         #rename columns for chart
-        output_df.columns = ["Portfolio Value", "Benchmark"]
+        output_df.columns = ["Port", "SPX"]
         
-        st.line_chart(output_df)
+        st.line_chart(output_df, width = 500, height = 300)
         
     #the returns
     with bottom_col2:
@@ -226,7 +215,7 @@ while True:
         st.subheader("Distribution of Portfolio's Daily Returns")
         
         port_rets = daily_portfolio['value'].pct_change().dropna()
-        dist_plot = px.histogram(port_rets, height=500, width=900, nbins = 200)
+        dist_plot = px.histogram(port_rets, height=400, width=700, nbins = 200)
         dist_plot.update_layout(showlegend=False, xaxis_title="Return (%)", yaxis_title = "frequency", font = dict(size = 15))
         st.plotly_chart(dist_plot)
 
@@ -234,17 +223,16 @@ while True:
     st.write("Created by Diego Alvarez, not associated with Leeds Investment Trading Group Fund, Values may not be up-to-date or approximations, updates don't occur until trading day ends")
     
     #the cost basis day provided from LITG
-    next_update = dt.datetime.today() + dt.timedelta(seconds = 60)
+    next_update = dt.datetime.today() + dt.timedelta(seconds = 60 * 60 * 4)
     
     #get update time
-    next_update_time = next_update - dt.timedelta(seconds = 7 * 60 * 60)
-    next_update_time = next_update_time.strftime("%a %D %I:%M %p") 
+    next_update_time = next_update.strftime("%a %D %I:%M %p")
     
     #output it
     st.write("next update is scheduled for {}".format(next_update_time))
     
     #wait 30 minutes
-    time.sleep(60)
+    time.sleep(60 * 60 * 4)
     
     #then rerun the app
     st.experimental_rerun()
